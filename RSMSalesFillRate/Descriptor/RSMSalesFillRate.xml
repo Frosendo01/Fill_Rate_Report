@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxModelInfo xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <Name>RSMSalesFillRate</Name>
+    <Version>1.0.0.0</Version>
+    <Publisher>RSM</Publisher>
+    <Description>Sales Fill Rate Report Extension</Description>
+    <Layer>50</Layer>
+    <Customization>
+        <Type>Model</Type>
+        <License>
+            <LicenseCode>RSM</LicenseCode>
+            <LicenseType>Model</LicenseType>
+        </License>
+    </Customization>
+    <ModuleDefinitionId>0</ModuleDefinitionId>
+    <ComponentDefinitionId>0</ComponentDefinitionId>
+</AxModelInfo> 

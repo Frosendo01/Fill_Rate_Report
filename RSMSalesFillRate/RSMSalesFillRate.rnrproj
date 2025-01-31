@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <BuildTasksDirectory Condition=" '$(BuildTasksDirectory)' == ''">$(MSBuildProgramFiles32)\MSBuild\Microsoft\Dynamics\AX</BuildTasksDirectory>
+    <Model>RSMSalesFillRate</Model>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <OutputPath>bin</OutputPath>
+    <SchemaVersion>2.0</SchemaVersion>
+    <GenerateCrossReferences>True</GenerateCrossReferences>
+    <RunAppCheckerRules>False</RunAppCheckerRules>
+    <LogAppcheckerDiagsAsErrors>False</LogAppcheckerDiagsAsErrors>
+    <DeployOnline>False</DeployOnline>
+    <ProjectGuid>{1971D365-4F0-4E5A-9B3D-F8A1E2B3C4D5}</ProjectGuid>
+    <Name>RSMSalesFillRate</Name>
+    <RootNamespace>RSMSalesFillRate</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <Configuration>Debug</Configuration>
+    <DBSyncInBuild>False</DBSyncInBuild>
+    <GenerateFormAdaptors>False</GenerateFormAdaptors>
+    <Company>RSM</Company>
+    <Partition>initial</Partition>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DataEntityExpandParentChildRelations>False</DataEntityExpandParentChildRelations>
+    <DataEntityUseLabelTextAsFieldName>False</DataEntityUseLabelTextAsFieldName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Classes\" />
+    <Folder Include="MenuItems\Display" />
+    <Folder Include="Resources\en-US" />
+    <Folder Include="Security" />
+    <Folder Include="Tables" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AxClass\rsmSalesFillRateContract">
+      <SubType>Content</SubType>
+      <Name>rsmSalesFillRateContract</Name>
+      <Link>Classes\rsmSalesFillRateContract.xml</Link>
+    </Content>
+    <Content Include="AxClass\rsmSalesFillRateController">
+      <SubType>Content</SubType>
+      <Name>rsmSalesFillRateController</Name>
+      <Link>Classes\rsmSalesFillRateController.xml</Link>
+    </Content>
+    <Content Include="AxClass\rsmSalesFillRateUIBuilder">
+      <SubType>Content</SubType>
+      <Name>rsmSalesFillRateUIBuilder</Name>
+      <Link>Classes\rsmSalesFillRateUIBuilder.xml</Link>
+    </Content>
+    <Content Include="AxMenuExtension\SalesInquiries.Extension">
+      <SubType>Content</SubType>
+      <Name>SalesInquiries.Extension</Name>
+      <Link>Menu\rsmSalesInquiriesMenu.xml</Link>
+    </Content>
+    <Content Include="AxMenuItem\rsmSalesFillRateMenuItem">
+      <SubType>Content</SubType>
+      <Name>rsmSalesFillRateMenuItem</Name>
+      <Link>MenuItems\Display\rsmSalesFillRateMenuItem.xml</Link>
+    </Content>
+    <Content Include="AxSecurityPrivilege\rsmSalesFillRatePrivilege">
+      <SubType>Content</SubType>
+      <Name>rsmSalesFillRatePrivilege</Name>
+      <Link>Security\rsmSalesFillRatePrivilege.xml</Link>
+    </Content>
+    <Content Include="AxTable\rsmSalesFillRateTmp">
+      <SubType>Content</SubType>
+      <Name>rsmSalesFillRateTmp</Name>
+      <Link>Tables\rsmSalesFillRateTmp.xml</Link>
+    </Content>
+    <Content Include="Resources\en-US\rsmSalesFillRate.labels.resources">
+      <SubType>Content</SubType>
+      <Name>rsmSalesFillRate.labels</Name>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Common.targets" />
+  <Import Project="$(BuildTasksDirectory)\Microsoft.Dynamics.Framework.Tools.BuildTasks.targets" />
+</Project> 

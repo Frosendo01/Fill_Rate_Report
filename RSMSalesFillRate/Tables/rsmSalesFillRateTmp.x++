@@ -5,13 +5,18 @@ public class rsmSalesFillRateTmp extends common
     public CustAccount CustomerAccount;
     public SalesId SalesId;
     public ItemId ItemId;
-    public Qty OrderedQty;
-    public Qty ShippedQty;
-    public Qty BackorderQty;
+    public SalesQty OrderedQty;
+    public SalesQty ShippedQty;
+    public SalesQty BackorderQty;
     public Percent FillRatePct;
-    public TransDate PromisedDate;
+    public TransDate PromisedDeliveryDate;
     public TransDate ActualShipDate;
-    public UnitOfMeasure SalesUnit;
+    public SalesUnit SalesUnit;
+    public CustGroup CustomerGroup;
+    public SalesStatus SalesOrderStatus;
+    public SalesLine LineNum;
+    public str SalesName;
+    public CurrencyCode SalesCurrency;
 
     public static Index RecIdIdx
     {
@@ -21,6 +26,12 @@ public class rsmSalesFillRateTmp extends common
     public static Index CustomerAccountIdx
     {
         CustomerAccount
+    }
+
+    public static Index SalesIdIdx
+    {
+        SalesId,
+        LineNum
     }
 
     public void new()

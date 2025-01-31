@@ -19,21 +19,34 @@ class rsmSalesFillRateController extends SysOperationServiceController
         Query                   query = new Query();
         QueryBuildDataSource   salesLineDS;
         QueryBuildDataSource   custInvoiceTransDS;
+        QueryBuildDataSource   salesTableDS;
         SalesLine              salesLine;
         CustInvoiceTrans       custInvoiceTrans;
+        SalesTable             salesTable;
         
         // Create main query
-        salesLineDS = query.addDataSource(tableNum(SalesLine));
-        salesLineDS.addRange(fieldNum(SalesLine, DeliveryDate)).value(queryRange(contract.parmFromDate(), contract.parmToDate()));
+        salesTableDS = query.addDataSource(tableNum(SalesTable));
+        salesTableDS.addRange(fieldNum(SalesTable, SalesType)).value(SalesType::Sales);  // Ensure only sales orders
         
         if (contract.parmCustAccount())
         {
-            salesLineDS.addRange(fieldNum(SalesLine, CustAccount)).value(contract.parmCustAccount());
+            salesTableDS.addRange(fieldNum(SalesTable, CustAccount)).value(contract.parmCustAccount());
         }
+
+        // Join with SalesLine
+        salesLineDS = salesTableDS.addDataSource(tableNum(SalesLine));
+        salesLineDS.relations(true);
+        salesLineDS.addRange(fieldNum(SalesLine, DeliveryDate)).value(queryRange(contract.parmFromDate(), contract.parmToDate()));
+        salesLineDS.addRange(fieldNum(SalesLine, Status)).value(SalesStatus::Delivered);
         
         if (contract.parmSiteId())
         {
             salesLineDS.addRange(fieldNum(SalesLine, InventSiteId)).value(contract.parmSiteId());
+        }
+        
+        if (contract.parmSalesUnit())
+        {
+            salesLineDS.addRange(fieldNum(SalesLine, SalesUnit)).value(contract.parmSalesUnit());
         }
         
         // Join with CustInvoiceTrans
@@ -43,29 +56,34 @@ class rsmSalesFillRateController extends SysOperationServiceController
         custInvoiceTransDS.addLink(fieldNum(CustInvoiceTrans, InventTransId), fieldNum(SalesLine, InventTransId));
         
         // Process results
-        while select salesLine
+        while select salesTable
+            joins salesLine
             joins custInvoiceTrans
-            where salesLine.Status == SalesStatus::Delivered
             from query
         {
-            this.processSalesLine(salesLine, custInvoiceTrans);
+            this.processSalesLine(salesTable, salesLine, custInvoiceTrans);
         }
     }
 
-    private void processSalesLine(SalesLine _salesLine, CustInvoiceTrans _custInvoiceTrans)
+    private void processSalesLine(SalesTable _salesTable, SalesLine _salesLine, CustInvoiceTrans _custInvoiceTrans)
     {
         tempTable = rsmSalesFillRateTmp::construct();
         
-        tempTable.CustomerAccount = _salesLine.CustAccount;
+        tempTable.CustomerAccount = _salesTable.CustAccount;
+        tempTable.CustomerGroup = _salesTable.CustGroup;
         tempTable.SalesId = _salesLine.SalesId;
+        tempTable.LineNum = _salesLine.LineNum;
+        tempTable.SalesName = _salesTable.SalesName;
+        tempTable.SalesCurrency = _salesTable.CurrencyCode;
         tempTable.ItemId = _salesLine.ItemId;
-        tempTable.OrderedQty = _salesLine.OrderedQty;
+        tempTable.OrderedQty = _salesLine.SalesQty;
         tempTable.ShippedQty = _custInvoiceTrans.Qty;
-        tempTable.BackorderQty = _salesLine.OrderedQty - _custInvoiceTrans.Qty;
-        tempTable.FillRatePct = (_custInvoiceTrans.Qty / _salesLine.OrderedQty) * 100;
-        tempTable.PromisedDate = _salesLine.DeliveryDate;
+        tempTable.BackorderQty = _salesLine.SalesQty - _custInvoiceTrans.Qty;
+        tempTable.FillRatePct = (_custInvoiceTrans.Qty / _salesLine.SalesQty) * 100;
+        tempTable.PromisedDeliveryDate = _salesLine.DeliveryDate;
         tempTable.ActualShipDate = _custInvoiceTrans.TransDate;
         tempTable.SalesUnit = _salesLine.SalesUnit;
+        tempTable.SalesOrderStatus = _salesLine.Status;
         
         tempTable.insert();
     }
@@ -73,7 +91,13 @@ class rsmSalesFillRateController extends SysOperationServiceController
     public QueryRun getQueryRun()
     {
         Query query = new Query();
-        query.addDataSource(tableNum(rsmSalesFillRateTmp));
+        QueryBuildDataSource tempTableDS = query.addDataSource(tableNum(rsmSalesFillRateTmp));
+        
+        // Add default sorting
+        tempTableDS.addSortField(fieldNum(rsmSalesFillRateTmp, CustomerAccount), SortOrder::Ascending);
+        tempTableDS.addSortField(fieldNum(rsmSalesFillRateTmp, SalesId), SortOrder::Ascending);
+        tempTableDS.addSortField(fieldNum(rsmSalesFillRateTmp, LineNum), SortOrder::Ascending);
+        
         return new QueryRun(query);
     }
 } 

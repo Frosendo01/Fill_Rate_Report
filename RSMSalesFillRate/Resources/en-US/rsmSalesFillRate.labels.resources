@@ -3,28 +3,44 @@
     <file source-language="en-US" target-language="en-US" datatype="plaintext" original="RSM">
         <body>
             <trans-unit id="RSM:SalesFillRateReport">
-                <source>Sales Fill Rate Report</source>
-                <target>Sales Fill Rate Report</target>
+                <source>Sales Order Fill Rate Report</source>
+                <target>Sales Order Fill Rate Report</target>
             </trans-unit>
             <trans-unit id="RSM:SalesFillRateReportHelp">
-                <source>View and analyze sales order fulfillment rates and delivery performance</source>
-                <target>View and analyze sales order fulfillment rates and delivery performance</target>
+                <source>Analyze sales order fulfillment rates and delivery performance against customer promises</source>
+                <target>Analyze sales order fulfillment rates and delivery performance against customer promises</target>
             </trans-unit>
             <trans-unit id="RSM:FillRatePercentage">
-                <source>Fill Rate %</source>
-                <target>Fill Rate %</target>
+                <source>Sales Fill Rate %</source>
+                <target>Sales Fill Rate %</target>
             </trans-unit>
             <trans-unit id="RSM:BackorderQuantity">
-                <source>Backorder Quantity</source>
-                <target>Backorder Quantity</target>
+                <source>Sales Backorder Quantity</source>
+                <target>Sales Backorder Quantity</target>
             </trans-unit>
-            <trans-unit id="RSM:PromisedDate">
-                <source>Promised Date</source>
-                <target>Promised Date</target>
+            <trans-unit id="RSM:PromisedDeliveryDate">
+                <source>Customer Promised Delivery Date</source>
+                <target>Customer Promised Delivery Date</target>
             </trans-unit>
             <trans-unit id="RSM:ActualShipDate">
-                <source>Actual Ship Date</source>
-                <target>Actual Ship Date</target>
+                <source>Actual Customer Ship Date</source>
+                <target>Actual Customer Ship Date</target>
+            </trans-unit>
+            <trans-unit id="RSM:SalesOrderStatus">
+                <source>Sales Order Status</source>
+                <target>Sales Order Status</target>
+            </trans-unit>
+            <trans-unit id="RSM:CustomerGroup">
+                <source>Customer Group</source>
+                <target>Customer Group</target>
+            </trans-unit>
+            <trans-unit id="RSM:SalesOrderedQty">
+                <source>Sales Ordered Quantity</source>
+                <target>Sales Ordered Quantity</target>
+            </trans-unit>
+            <trans-unit id="RSM:SalesShippedQty">
+                <source>Sales Shipped Quantity</source>
+                <target>Sales Shipped Quantity</target>
             </trans-unit>
         </body>
     </file>

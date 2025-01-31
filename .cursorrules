@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DevelopmentPrompt>
+    <!-- 1. CONTEXT UPDATE TO SALES -->
+    <Context>
+        <Role>Senior D365 Developer</Role>
+        <Purpose>
+            Implement sales order fulfillment analysis solution:
+            - Track order fulfillment effectiveness
+            - Analyze customer service levels
+            - Identify shipment bottlenecks
+        </Purpose>
+        <Constraints>
+            <UpgradePolicy>ExtensionOnly</UpgradePolicy>
+            <Integration>PowerBI Export</Integration>
+        </Constraints>
+    </Context>
+
+    <!-- 2. SALES-SPECIFIC TASK CONFIGURATION -->
+    <UserInput>
+        <ProblemStatement>
+            Create sales fill rate report showing:
+            - Sales Order Quantity vs Actual Shipped Quantity
+            - Fill Rate % = (Shipped Qty/Ordered Qty)*100
+            - Customer-specific performance tracking
+            Accessible via Sales & Marketing > Inquiries > "Sales Fill Rate Report"
+            
+            Technical Requirements:
+            - Use SalesLine and CustInvoiceTrans as primary sources
+            - Include backorder quantities
+            - Customer hierarchy filtering
+            - Delivery date vs ship date analysis
+        </ProblemStatement>
+
+        <AcceptanceCriteria>
+            <Performance>Handle 500k sales lines under 3s</Performance>
+            <Security>Customer-specific data isolation</Security>
+            <Compliance>Mask PII in exports</Compliance>
+        </AcceptanceCriteria>
+    </UserInput>
+
+    <!-- 3. SALES-FOCUSED OUTPUT STRUCTURE -->
+    <DesiredOutput>
+        <CodeArtifacts>
+            <!-- Core Sales Components -->
+            <SysOperation>
+                <Controller>SalesFillRateController</Controller>
+                <DataContract>SalesFillRateParameters</DataContract>
+                <UIBuilder>SalesFillRateUIBuilder</UIBuilder>
+            </SysOperation>
+
+            <!-- Sales Data Model -->
+            <TemporaryTable>SalesFillRateTmp</TemporaryTable>
+            <DataEntity>SalesFillRateEntity</DataEntity>
+            
+            <!-- Sales Module Integration -->
+            <FormExtension path="SalesInquiries">SalesFillRateForm.Extension</FormExtension>
+            <MenuItem>SalesFillRateReport</MenuItem>
+        </CodeArtifacts>
+
+        <Validation>
+            <UnitTest coverage="95%">
+                <Scenario>PartialShipmentCalculation</Scenario>
+                <Scenario>BackorderHandling</Scenario>
+            </UnitTest>
+            <IntegrationTest>
+                <Scenario>CustomerHierarchyRollup</Scenario>
+                <Scenario>MultiSiteFulfillment</Scenario>
+            </IntegrationTest>
+        </Validation>
+
+        <Documentation>
+            <TechnicalSpec>
+                <DataFlow>SalesLine -> CustInvoiceTrans -> ShipmentCalc</DataFlow>
+                <KeyTables>
+                    <Table>SalesLine</Table>
+                    <Table>CustInvoiceTrans</Table>
+                    <Table>InventTrans</Table>
+                    <Table>CustTable</Table>
+                </KeyTables>
+            </TechnicalSpec>
+            <UserGuide>
+                <FilterParameters>
+                    <Parameter>CustomerAccount</Parameter>
+                    <Parameter>SalesUnit</Parameter>
+                    <Parameter>PromiseDateRange</Parameter>
+                </FilterParameters>
+                <OutputColumns>
+                    <Column>OrderedQty</Column>
+                    <Column>ShippedQty</Column>
+                    <Column>BackorderQty</Column>
+                    <Column>FillRatePct</Column>
+                </OutputColumns>
+            </UserGuide>
+        </Documentation>
+    </DesiredOutput>
+
+    <!-- 4. SALES-SPECIFIC IMPLEMENTATION -->
+    <ImplementationStrategy>
+        <DataProcessing>
+            <Step order="1">Extract committed quantities from SalesLine</Step>
+            <Step order="2">Join with actual shipments from CustInvoiceTrans</Step>
+            <Step order="3">Calculate fulfillment timelines</Step>
+            <Step order="4">Apply customer hierarchy rollups</Step>
+        </DataProcessing>
+
+        <PerformanceOptimization>
+            <Technique>Columnstore indexing on SalesLine</Technique>
+            <Technique>Batch processing by SalesUnit</Technique>
+            <Technique>Materialized view caching</Technique>
+        </PerformanceOptimization>
+
+        <SecurityMeasures>
+            <Data>Customer segmentation by SalesPool</Data>
+            <FieldMasking>Customer contact info</FieldMasking>
+        </SecurityMeasures>
+
+        <KeyDifferentiators>
+            <Feature>Backorder Impact Analysis</Feature>
+            <Feature>Service Level Agreement Tracking</Feature>
+            <Feature>Promised vs Actual Ship Date</Feature>
+        </KeyDifferentiators>
+    </ImplementationStrategy>
+</DevelopmentPrompt>

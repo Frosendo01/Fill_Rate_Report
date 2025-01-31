@@ -1,0 +1,16 @@
+[ExtensionOf(menuStr(SalesInquiries))]
+final class rsmSalesInquiriesMenu_Extension
+{
+    public static void construct()
+    {
+        next construct();
+        
+        MenuItemDisplay menuItem = new MenuItemDisplay(menuItemDisplayStr(rsmSalesFillRateMenuItem));
+        Menu subMenu = SysContextMenu::getContextMenu(MenuItemGroupStr(SalesInquiries));
+        
+        if (subMenu)
+        {
+            subMenu.addItem(menuItem);
+        }
+    }
+} 

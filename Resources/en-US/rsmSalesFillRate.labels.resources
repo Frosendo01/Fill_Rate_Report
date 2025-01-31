@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2">
+    <file source-language="en-US" target-language="en-US" datatype="plaintext" original="RSM">
+        <body>
+            <trans-unit id="RSM:SalesFillRateReport">
+                <source>Sales Fill Rate Report</source>
+                <target>Sales Fill Rate Report</target>
+            </trans-unit>
+            <trans-unit id="RSM:SalesFillRateReportHelp">
+                <source>View and analyze sales order fulfillment rates and delivery performance</source>
+                <target>View and analyze sales order fulfillment rates and delivery performance</target>
+            </trans-unit>
+            <trans-unit id="RSM:FillRatePercentage">
+                <source>Fill Rate %</source>
+                <target>Fill Rate %</target>
+            </trans-unit>
+            <trans-unit id="RSM:BackorderQuantity">
+                <source>Backorder Quantity</source>
+                <target>Backorder Quantity</target>
+            </trans-unit>
+            <trans-unit id="RSM:PromisedDate">
+                <source>Promised Date</source>
+                <target>Promised Date</target>
+            </trans-unit>
+            <trans-unit id="RSM:ActualShipDate">
+                <source>Actual Ship Date</source>
+                <target>Actual Ship Date</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff> 

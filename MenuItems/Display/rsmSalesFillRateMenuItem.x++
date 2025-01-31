@@ -1,0 +1,12 @@
+[DisplayMenuItemAttribute("Sales Fill Rate Report")]
+public class rsmSalesFillRateMenuItem extends MenuItemOperation
+{
+    public void new()
+    {
+        super();
+        this.ObjectType = MenuItemObjectType::Class;
+        this.Object = classStr(rsmSalesFillRateReport);
+        this.Label = "@RSM:SalesFillRateReport";
+        this.HelpText = "@RSM:SalesFillRateReportHelp";
+    }
+} 

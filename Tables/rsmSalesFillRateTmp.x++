@@ -1,0 +1,34 @@
+[InMemoryDDL]
+public class rsmSalesFillRateTmp extends common
+{
+    public RecId RecId;
+    public CustAccount CustomerAccount;
+    public SalesId SalesId;
+    public ItemId ItemId;
+    public Qty OrderedQty;
+    public Qty ShippedQty;
+    public Qty BackorderQty;
+    public Percent FillRatePct;
+    public TransDate PromisedDate;
+    public TransDate ActualShipDate;
+    public UnitOfMeasure SalesUnit;
+
+    public static Index RecIdIdx
+    {
+        RecId
+    }
+
+    public static Index CustomerAccountIdx
+    {
+        CustomerAccount
+    }
+
+    public void new()
+    {
+    }
+
+    public static rsmSalesFillRateTmp construct()
+    {
+        return new rsmSalesFillRateTmp();
+    }
+} 

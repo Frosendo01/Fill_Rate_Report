@@ -1,0 +1,16 @@
+public class rsmSalesFillRateReport extends SysOperationFormRunBaseBatch
+{
+    public void new()
+    {
+        super();
+        this.parmClassName(classStr(rsmSalesFillRateController));
+        this.parmDataContractClassName(classStr(rsmSalesFillRateContract));
+        this.parmDialogClassName(classStr(rsmSalesFillRateUIBuilder));
+    }
+
+    public static void main(Args _args)
+    {
+        rsmSalesFillRateReport report = new rsmSalesFillRateReport();
+        report.run();
+    }
+} 

@@ -1,0 +1,39 @@
+class rsmSalesFillRateUIBuilder extends SysOperationAutomaticUIBuilder
+{
+    protected void buildFromContract()
+    {
+        DialogField dialogField;
+        
+        super();
+        
+        // From Date
+        dialogField = this.addDialogField(methodStr(rsmSalesFillRateContract, parmFromDate));
+        dialogField.mandatory(true);
+        
+        // To Date
+        dialogField = this.addDialogField(methodStr(rsmSalesFillRateContract, parmToDate));
+        dialogField.mandatory(true);
+        
+        // Customer Account
+        dialogField = this.addDialogField(methodStr(rsmSalesFillRateContract, parmCustAccount));
+        dialogField.mandatory(false);
+        
+        // Site ID
+        dialogField = this.addDialogField(methodStr(rsmSalesFillRateContract, parmSiteId));
+        dialogField.mandatory(false);
+        
+        // Sales Unit
+        dialogField = this.addDialogField(methodStr(rsmSalesFillRateContract, parmSalesUnit));
+        dialogField.mandatory(false);
+    }
+    
+    public void new()
+    {
+        super();
+    }
+
+    public static rsmSalesFillRateUIBuilder construct()
+    {
+        return new rsmSalesFillRateUIBuilder();
+    }
+} 

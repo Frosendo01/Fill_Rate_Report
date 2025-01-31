@@ -1,0 +1,54 @@
+[DataContractAttribute]
+public class rsmSalesFillRateContract extends SysOperationDataContract
+{
+    private DateFromFilter fromDate;
+    private DateToFilter toDate;
+    private CustAccount custAccount;
+    private InventSiteId siteId;
+    private UnitOfMeasure salesUnit;
+    
+    [DataMemberAttribute]
+    public DateFromFilter parmFromDate(DateFromFilter _fromDate = fromDate)
+    {
+        fromDate = _fromDate;
+        return fromDate;
+    }
+    
+    [DataMemberAttribute]
+    public DateToFilter parmToDate(DateToFilter _toDate = toDate)
+    {
+        toDate = _toDate;
+        return toDate;
+    }
+    
+    [DataMemberAttribute]
+    public CustAccount parmCustAccount(CustAccount _custAccount = custAccount)
+    {
+        custAccount = _custAccount;
+        return custAccount;
+    }
+    
+    [DataMemberAttribute]
+    public InventSiteId parmSiteId(InventSiteId _siteId = siteId)
+    {
+        siteId = _siteId;
+        return siteId;
+    }
+    
+    [DataMemberAttribute]
+    public UnitOfMeasure parmSalesUnit(UnitOfMeasure _salesUnit = salesUnit)
+    {
+        salesUnit = _salesUnit;
+        return salesUnit;
+    }
+
+    public void new()
+    {
+        super();
+    }
+
+    public static rsmSalesFillRateContract construct()
+    {
+        return new rsmSalesFillRateContract();
+    }
+} 

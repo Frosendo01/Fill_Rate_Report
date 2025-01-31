@@ -1,0 +1,17 @@
+[SecurityPrivilegeAttribute("View Sales Fill Rate Report",
+    "Allows users to view and run the Sales Fill Rate Report")]
+public class rsmSalesFillRatePrivilege extends SecurityPrivilegePermissionSet
+{
+    protected void construct()
+    {
+        super();
+        this.addMenuItemOperation(menuItemDisplayStr(rsmSalesFillRateMenuItem), MenuItemOperation::View);
+        this.addMenuItemOperation(menuItemDisplayStr(rsmSalesFillRateMenuItem), MenuItemOperation::Run);
+        this.addObject(tableStr(rsmSalesFillRateTmp), SecurityRightLevel::Read);
+    }
+
+    public SecurityPrivilegeType privilegeType()
+    {
+        return SecurityPrivilegeType::Operation;
+    }
+} 
